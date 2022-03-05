@@ -36,7 +36,6 @@ function generatePassword() {
     var passLength = parseInt(userInput);
         if (!userInput || isNaN(userInput) || passLength < 8 || passLength > 128) {
             alert("Please choose a number between 8 and 128.");
-            getPasswordLength();
         }
 
     // ask user if they want lowercase, uppercase, numeric or special characters
