@@ -1,16 +1,9 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// set the variables globally so they can be used by the functions following 
 
-// set the four arrays needed
-// const lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-// const upperCase = lowerCase.map(function (e) {
-//     return e.toUpperCase();
-// });
-// const numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-// const specialChars = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '?'];
-
-
+// group the four needed strings together under an object named 'passOptions'
 const passOptions = {
     lowercase: "abcdefghijklmnopqrstuvwxyz",
     uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -18,26 +11,49 @@ const passOptions = {
     special: "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
 }
 
+// set beginning empty values for userPass and passCharSet (array to store accepted password options)
 let userPass = "";
-const passCharSet = [];
+let passCharSet = [];
+
+// add some default clear functions for userPass and passCharSet
+function clearUserPass() {
+    return userPass = "";
+}
+
+function clearPassCharSet() {
+    return passCharSet = [];
+}
     
 
 // code for generating the password starts here
 function generatePassword() {
 
+    // first clear the values in case userPass and passCharSet already contain something
+    if (userPass && passCharSet) {
+        clearUserPass();
+        clearPassCharSet();
+        return;
+    }
+
     // create the password Length
-    var userInput = prompt("How many characters long?\n(Enter a number between 8 and 128)");
+    let userInput = prompt("How many characters long?\n(Enter a number between 8 and 128)");
         // exit out if user presses cancel
-        if (userInput === null) {
+        if (!userInput || userInput === null) {
             return;
         }
 
     // if user input is empty, not a number, under 8, or over 128, send up an alert to redo
-    var passLength = parseInt(userInput);
+    const passLength = parseInt(userInput);
         if (!userInput || isNaN(userInput) || passLength < 8 || passLength > 128) {
             alert("Please choose a number between 8 and 128.");
             generatePassword();
         }
+
+
+    // get a random character from the value of the corresponding object key
+    function getRandomChar(fromString) {
+        return fromString[Math.floor(Math.random() * fromString.length)];
+    }
 
     // ask user if they want lowercase, uppercase, numeric or special characters
 
@@ -80,20 +96,44 @@ function generatePassword() {
         console.log(userPass);
         console.log(passCharSet);
 
-    if (!passCharSet.length >= 1) {
-        alert("Uh oh, something's amiss!\n\nPlease choose at least one (1) character type to include in your password.");
-    } else {
-        return;
-    }
-        
+    if (!passCharSet.length) {
+        alert("Uh oh, something's gone awry!\n\n" + "Please choose at least one (1) character type to include in your password.");
+        return generatePassword();
+    } 
+    
+    while (passCharSet.length < passLength) {
+        passCharSet.push(getRandomChar(userPass));
 
-function getRandomChar(fromString){
-    return fromString[Math.floor(Math.random() * fromString.length)];
+        console.log(passCharSet);
     }
+
+    // Example: user chooses 43 char password:
+    // i = 43 -1 (42 is the last character's index number in the array of length 43);
+    // if 'i' is over 0, ie 42 > 0,
+    // 'i' minus 1 <----- go as a loop
+    // set variable 'swapIndex' = randomise X 43 (array length)
+    // set a variable named 'temporary' to be the same as an index of passCharSet
+
+    // let the passCharSet index be overridden by the randomised passCharSet index
+    // set the randomised passCharSet index to match and override the temporary variable
+    // since temp = passCharSet[i], the randomised passCharSet index is now the new [i]
+    // continue until there are no old 'i's left
+
+    for (let i = passCharSet.length - 1; i > 0; i--) {
+        const swapIndex = Math.floor(Math.random() * (i + 1));
+        const temp = passCharSet[i];
+
+        passCharSet[i] = passCharSet[swapIndex];
+        passCharSet[swapIndex] = temp;
+    };
+
+    //when for loop is completed, password is generated. Display an alert for the user
+    alert("Your password has been successfully generated!\n\n" + passCharSet.join("") + "\n\nIt will be displayed in the text area once this alert box is closed.");
+
+    // this makes the password show up in the text area
+    return passCharSet.join("");  
 
 }
-
-// console.log(stringGen(passLength));
 
 
 // Write password to the #password input
@@ -102,19 +142,9 @@ function writePassword() {
     var passwordText = document.querySelector("#password");
 
     passwordText.value = password;
+
 } 
 
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
-
-
-
-// var lowercase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-// var uppercase = lowercase.toUpperCase();
-// var numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-// var specialChars = ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '?'];
