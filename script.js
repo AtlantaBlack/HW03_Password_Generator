@@ -21,28 +21,26 @@ function clearPassInputs() {
     passCharSet = [];
 }
 
-
 // code for generating the password starts here
 function generatePassword() {
 
     // first clear the values in case userPass and passCharSet already contain something
-    if (userPass || passCharSet|| userInput) {
+    if (userPass || passCharSet) {
         clearPassInputs();
     }
 
     // create the password Length
     let userInput = prompt("How many characters long?\n(Enter a number between 8 and 128)");
         // exit out if user presses cancel
-        if (!userInput || userInput == null) {
+        if (userInput === null) {
             return;
         }
 
     // if user input is empty, not a number, under 8, or over 128, send up an alert to redo
     let passLength = parseInt(userInput);
         if (!userInput || isNaN(userInput) || passLength < 8 || passLength > 128) {
-            userInput = "";
             alert("Please choose a number between 8 and 128.");
-            generatePassword();
+            return generatePassword();
         }
 
 
@@ -97,16 +95,19 @@ function generatePassword() {
         return generatePassword();
     } 
     
+    // while the length of passCharSet arry is less than user-requested password length, pull random values from the userPass string (beefed up with all the specified pass options)
     while (passCharSet.length < passLength) {
         passCharSet.push(getRandomChar(userPass));
 
         console.log(passCharSet);
     }
 
-    // Example: user chooses 43 char password:
+    // BELOW: Fisher-Yates shuffle algorithm
+    // example: user chooses 43 character password:
+
     // i = 43 -1 (42 is the last character's index number in the array of length 43);
-    // if 'i' is over 0, ie 42 > 0,
-    // 'i' minus 1 <----- go as a loop
+    // if 'i' is over 0 (ie 42 > 0), then
+    // 'i' minus 1 each time <----- go as a loop
     // set variable 'swapIndex' = randomise X 43 (array length)
     // set a variable named 'temporary' to be the same as an index of passCharSet
 
@@ -114,7 +115,6 @@ function generatePassword() {
     // set the randomised passCharSet index to match and override the temporary variable
     // since temp = passCharSet[i], the randomised passCharSet index is now the new [i]
     // continue until there are no old 'i's left
-
     for (let i = passCharSet.length - 1; i > 0; i--) {
         const swapIndex = Math.floor(Math.random() * (i + 1));
         const temp = passCharSet[i];
@@ -128,7 +128,6 @@ function generatePassword() {
 
     // this makes the password show up in the text area
     return passCharSet.join("");  
-
 }
 
 
@@ -138,6 +137,10 @@ function writePassword() {
     var passwordText = document.querySelector("#password");
 
     passwordText.value = password;
+
+        if (!password) {
+            passwordText.value = "No password was generated";
+        };
 
 } 
 
