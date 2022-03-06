@@ -16,35 +16,31 @@ let userPass = "";
 let passCharSet = [];
 
 // add some default clear functions for userPass and passCharSet
-function clearUserPass() {
-    return userPass = "";
+function clearPassInputs() {
+    userPass = "";
+    passCharSet = [];
 }
 
-function clearPassCharSet() {
-    return passCharSet = [];
-}
-    
 
 // code for generating the password starts here
 function generatePassword() {
 
     // first clear the values in case userPass and passCharSet already contain something
-    if (userPass && passCharSet) {
-        clearUserPass();
-        clearPassCharSet();
-        return;
+    if (userPass || passCharSet|| userInput) {
+        clearPassInputs();
     }
 
     // create the password Length
     let userInput = prompt("How many characters long?\n(Enter a number between 8 and 128)");
         // exit out if user presses cancel
-        if (!userInput || userInput === null) {
+        if (!userInput || userInput == null) {
             return;
         }
 
     // if user input is empty, not a number, under 8, or over 128, send up an alert to redo
-    const passLength = parseInt(userInput);
+    let passLength = parseInt(userInput);
         if (!userInput || isNaN(userInput) || passLength < 8 || passLength > 128) {
+            userInput = "";
             alert("Please choose a number between 8 and 128.");
             generatePassword();
         }
