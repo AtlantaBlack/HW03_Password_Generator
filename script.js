@@ -11,7 +11,9 @@ const passOptions = {
     special: "!#$%&'()*+,-./:;<=>?@[]^_`{|}~"
 }
 
-// set beginning empty values for userPass and passCharSet (array to store accepted password options)
+// set beginning empty values for userPass and passCharSet
+// userPass: string to add passOption values to
+// passCharSet: array to generate the password from
 let userPass = "";
 let passCharSet = [];
 
@@ -29,7 +31,7 @@ function generatePassword() {
         clearPassInputs();
     }
 
-    // create the password Length
+    // ask user to define the password length
     let userInput = prompt("How many characters long?\n(Enter a number between 8 and 128)");
         // exit out if user presses cancel
         if (userInput === null) {
@@ -37,69 +39,54 @@ function generatePassword() {
         }
 
     // if user input is empty, not a number, under 8, or over 128, send up an alert to redo
+    //NB: make sure to add return before calling generatePassword function, else the password generator continues and also incorrectly generates pass at the end
     let passLength = parseInt(userInput);
         if (!userInput || isNaN(userInput) || passLength < 8 || passLength > 128) {
             alert("Please choose a number between 8 and 128.");
             return generatePassword();
         }
 
-
-    // get a random character from the value of the corresponding object key
+    // function to return a random character from the value of the corresponding object key
     function getRandomChar(fromString) {
         return fromString[Math.floor(Math.random() * fromString.length)];
     }
 
-    // ask user if they want lowercase, uppercase, numeric or special characters
-
-    // If yes, add corresponding object string to userPass variable. 
-
-    // At the same time, add one random character from that string to the passCharSet array (for shuffling later). This is to make sure final password contains at least one of each selected character type
-    let getLowerCase = window.confirm("Password to contain lowercase letters?");
+    // ask user for included password options (lower, upper, num, special chars)
+    // If YES to any q, add corresponding object string to userPass variable. 
+    // ALSO, add one random character from that string to the passCharSet array (for shuffling later). This is to ensure final pass contains at least one of each selected char type
+    let getLowerCase = window.confirm("Password to contain any lowercase characters?");
         if (getLowerCase) {
             userPass += passOptions.lowercase;
             passCharSet.push(getRandomChar(passOptions.lowercase));
         } 
 
-        console.log(userPass);
-        console.log(passCharSet);
-
-    let getUpperCase = window.confirm("Password to contain UPPERCASE letters?")
+    let getUpperCase = window.confirm("Password to contain any UPPERCASE characters?")
         if (getUpperCase) {
             userPass += passOptions.uppercase;
             passCharSet.push(getRandomChar(passOptions.uppercase));
         }
 
-        console.log(userPass);
-        console.log(passCharSet);
-
-    let getNumerals = window.confirm("Password to contain numeric numbers? (0-9)")
+    let getNumerals = window.confirm("Password to contain any numeric characters? (0-9)")
         if (getNumerals) {
             userPass += passOptions.num;
             passCharSet.push(getRandomChar(passOptions.num));
         }
 
-        console.log(userPass);
-        console.log(passCharSet);
-
-    let getSpecials = window.confirm("Password to contain special characters? (eg. ? ! @ $)")
+    let getSpecials = window.confirm("Password to contain any special characters? (eg. ? ! @ $)")
         if (getSpecials) {
             userPass += passOptions.special;
             passCharSet.push(getRandomChar(passOptions.special));
         }
 
-        console.log(userPass);
-        console.log(passCharSet);
-
+    // if user hasn't selected any character types with which to populate their password, display an alert so they know what they did wrong
     if (!passCharSet.length) {
         alert("Uh oh, something's gone awry!\n\n" + "Please choose at least one (1) character type to include in your password.");
         return generatePassword();
     } 
     
-    // while the length of passCharSet arry is less than user-requested password length, pull random values from the userPass string (beefed up with all the specified pass options)
+    // while the length of passCharSet array is less than user-requested password length, pull random values from the userPass string (beefed up with all specified pass options) until passLength number is satisfied
     while (passCharSet.length < passLength) {
         passCharSet.push(getRandomChar(userPass));
-
-        console.log(passCharSet);
     }
 
     // BELOW: Fisher-Yates shuffle algorithm
@@ -126,7 +113,7 @@ function generatePassword() {
     //when for loop is completed, password is generated. Display an alert for the user
     alert("Your password has been successfully generated!\n\n" + passCharSet.join("") + "\n\nIt will be displayed in the text area once this alert box is closed.");
 
-    // this makes the password show up in the text area
+    // this makes the password (joined without spaces) show up in the text area
     return passCharSet.join("");  
 }
 
@@ -138,6 +125,7 @@ function writePassword() {
 
     passwordText.value = password;
 
+    // if the user exits out of the password generator then some text will be displayed in the text area
     if (!password) {
         passwordText.value = "No password was generated";
     };
