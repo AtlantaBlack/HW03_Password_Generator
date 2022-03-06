@@ -138,9 +138,9 @@ function writePassword() {
 
     passwordText.value = password;
 
-        if (!password) {
-            passwordText.value = "No password was generated";
-        };
+    if (!password) {
+        passwordText.value = "No password was generated";
+    };
 
 } 
 
