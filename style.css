@@ -88,6 +88,12 @@ header {
   cursor: pointer;
 }
 
+.btn:hover,
+.btn:focus {
+  background-color: rgb(119, 17, 17);
+  outline: 3px dashed rgb(255, 159, 33);
+}
+
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
