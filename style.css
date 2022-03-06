@@ -88,6 +88,7 @@ header {
   cursor: pointer;
 }
 
+/* some small cosmetic additions for accessibility */
 .btn:hover,
 .btn:focus {
   background-color: rgb(119, 17, 17);
