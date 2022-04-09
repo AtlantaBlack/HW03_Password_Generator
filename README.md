@@ -26,15 +26,19 @@ This application was built using:
 
 [Link to GitHub repository](https://github.com/AtlantaBlack/Password_Generator)
 
-![Screenshot of Password Generator: no password generated](./assets/images/screenshot_pg-01-empty.jpg?raw=true "Application showing blank text area")
+---
 
-![Screenshot of Password Generator: asking for password length](./assets/images/screenshot_pg-02-pass-length.jpg?raw=true "Prompt asking user input for length of password")
+## Screenshots of Application
 
-![Screenshot of Password Generator: asking for special characters](./assets/images/screenshot_pg-03-special-chars.jpg?raw=true "Prompt asking user input to include special characters in password")
+![Screenshot of Password Generator: no password generated](./assets/images/screenshot-pg-01-empty.jpg?raw=true "Application showing blank text area")
 
-![Screenshot of Password Generator: alert confirming new generated password](./assets/images/screenshot_pg-04-genned.jpg?raw=true "Alert confirming new generated password")
+![Screenshot of Password Generator: asking for password length](./assets/images/screenshot-pg-02-pass-length.jpg?raw=true "Prompt asking user input for length of password")
 
-![Screenshot of Password Generator: visible generated password](./assets/images/screenshot_pg-05-password.jpg?raw=true "Application showing text area containing generated password")
+![Screenshot of Password Generator: asking for special characters](./assets/images/screenshot-pg-03-special-chars.jpg?raw=true "Prompt asking user input to include special characters in password")
+
+![Screenshot of Password Generator: alert confirming new generated password](./assets/images/screenshot-pg-04-genned.jpg?raw=true "Alert confirming new generated password")
+
+![Screenshot of Password Generator: visible generated password](./assets/images/screenshot-pg-05-password.jpg?raw=true "Application showing text area containing generated password")
 
 ---
 
