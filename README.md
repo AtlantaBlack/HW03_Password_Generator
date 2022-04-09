@@ -1,4 +1,4 @@
-# BCS HW 03 - Password Generator
+# Password Generator
 
 ## Description
 
@@ -12,11 +12,19 @@ As a newbie to Javascript and the programming world in general, there were a num
 
 ## Usage
 
-[Link to deployed application via GitHub Pages](https://atlantablack.github.io/HW03_Password_Generator/)
+[Link to deployed application via GitHub Pages](https://atlantablack.github.io/Password_Generator/)
 
-[Link to GitHub repository](https://github.com/AtlantaBlack/HW03_Password_Generator)
+[Link to GitHub repository](https://github.com/AtlantaBlack/Password_Generator)
 
-![Screenshot of Password Generator](/pw-gen-screenshot.jpg?raw=true "Password Generator")
+![Screenshot of Password Generator: no password generated](./assets/images/screenshot_pg-01-empty.jpg?raw=true "Application showing blank text area")
+
+![Screenshot of Password Generator: asking for password length](./assets/images/screenshot_pg-02-pass-length.jpg?raw=true "Prompt asking user input for length of password")
+
+![Screenshot of Password Generator: asking for special characters](./assets/images/screenshot_pg-03-special-chars.jpg?raw=true "Prompt asking user input to include special characters in password")
+
+![Screenshot of Password Generator: alert confirming new generated password](./assets/images/screenshot_pg-04-genned.jpg?raw=true "Alert confirming new generated password")
+
+![Screenshot of Password Generator: visible generated password](./assets/images/screenshot_pg-05-password.jpg?raw=true "Application showing text area containing generated password")
 
 ---
 
